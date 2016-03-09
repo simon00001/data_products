@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\nlibrary(ggplot2)\n\n#global variable\nxlist <- NULL\nylist <- NULL\n\nNo_of_Try <-NULL\nNumber_Guess <-NULL\n\n# function to check the number input against the number select by computer\n# return the string of comments to provide hints to user before enter the next number\n\nnumberGuessed <- function(guess, number) {\n  returnValue <- \"You had not entered anything yet.\"\n  if (guess > 100) {\n    returnValue <- 'Above 100.\\nPlease make a selection between 1 and 100.'\n  }\n  else if (guess < 1) {\n    returnValue <- 'Below 1.\\nPlease make a selection between 1 and 100.'\n  }\n  else if (guess > number) {\n    returnValue <- 'Higher than the number.'\n  }\n  else if (guess < number) {\n    returnValue <- 'Lower than the number.'\n  }\n  else if (guess == number) {\n    returnValue <- 'Correct! Finally you get the correct right number. Congratulation'\n  }\n  returnValue\n}\n\nshinyServer(function(input,output,session){\n  #the computer guesses an integer between 1 & 100\n  number <- floor(runif(1,1,101))\n  xlist <<- NULL\n  ylist <<- NULL\n  \n  No_of_Try <<-NULL\n  Number_Guess <<-NULL\n  #auto evaluate the input number against the computer selected number\n    data1= reactive({\n    if(input$submit!=0){\n      isolate({\n        # update the xlist and store the gap between the new input value and the number select by computer\n       xlist[length(xlist)+1] <<- length(xlist)+1\n        a <- as.numeric(input$datavalues)\n        ylist[length(ylist)+1] <<- a - number\n        Number_Guess[length(Number_Guess)+1] <<- a\n       data.frame(paste(input$datavalues))\n      })\n    }\n  })\n  \n# Preparing and passing the input value and display in the webpages with comments  \n  output$inputValue <- renderPrint({as.numeric(input$datavalues)})\n  output$outputValue <- renderText({\n    if (input$submit == 0) \"You have not guessed a number yet\"\n    else if (input$submit >= 1) numberGuessed(as.numeric(input$datavalues), number)\n  })\n \n    \n  output$datatable<-renderPrint(function(){\n    if(!is.null(data1())){\n      No_of_Try <- xlist\n      d <- data.frame(No_of_Try,Number_Guess)\n     # d<-data1()\n      print(d)\n    }\n  })\n  \n  # Preparing the ploting of the histogram to show analysics\n  output$distPlot <- renderPlot({\n    if(!is.null(data1()) & (input$hints!=0)){\n    dtf <- data.frame(xlist,ylist)\n\n    # draw the histogram with Guess Game Analysics\n    if (length(xlist) >= 1){\n        ggplot(dtf, aes(xlist, ylist)) + geom_bar(stat = \"identity\", aes(fill=xlist)) + labs(x=\"No of Tries\", y=\"Gap between Number Guess\", title=\"Number Guess Analyzer\")+ geom_text(aes(label = ylist)) +  theme_bw() \n     }\n   }\n  })\n})",
+    "created" : 1457332416328.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2553569553",
+    "id" : "D8944514",
+    "lastKnownWriteTime" : 1457469778,
+    "path" : "~/GitHub/shiny/guess/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

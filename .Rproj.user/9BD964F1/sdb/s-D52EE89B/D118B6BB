@@ -1,0 +1,17 @@
+{
+    "contents" : "# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\nlibrary(shiny)\nshinyUI(pageWithSidebar(\n  # Application title\n  headerPanel(\"Guess The Number!\",\"Result of your Guess\"),\n  sidebarPanel(\n    wellPanel(\n      textInput('datavalues', \"Number Guess\",\"\"),\n      h5('Please press \\'Go!\\' to see your guessing result, or press \\'Analyze!\\' which provide analysis on your Number guess.'),\n      actionButton(\"submit\",\"Go\"),\n      actionButton(\"hints\",\"Analyze\")\n    )\n  ),\n  \n  mainPanel(\n    h3('Please Guess an integer between 1 and 100 (perhaps your lucky number)'),\n    h5('The main objective of this game is to guess an integer between\n       1 and 100 (inclusive) and try to match it with the computer\\'s\n       selected random number. The result of the guess will be analyse if you press the \"Analyze\" button'),\n    h3('Results of Your guess'),\n    h4('You had entered'),\n    verbatimTextOutput(\"inputValue\"),\n    h4('Which is...'),\n    verbatimTextOutput(\"outputValue\"),\n    h3('Guess Number Analyzer'),\n    h5('Your input number will be analyze and the gap of between the numbers will be show in the chart'),\n    h6('(press the \"Analyze\" button to show the analyze graph)'),\n    h4('Here is your guess number history :'),\n    verbatimTextOutput('datatable'),\n    plotOutput(\"distPlot\"),\n    h5('Thank you and hope your enjoy for using the simple application')\n  )\n)\n)",
+    "created" : 1457330095853.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3121310047",
+    "id" : "D118B6BB",
+    "lastKnownWriteTime" : 1457468674,
+    "path" : "~/GitHub/shiny/guess/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

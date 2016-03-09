@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing Data Products - Course Project</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Developing Data Products - Course Project">
+  <meta name="author" content="Simon Kong (6 March 2016)">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Developing Data Products - Course Project</h1>
+    <h2>Guess the Number Game (with Analyzer)</h2>
+    <p>Simon Kong (6 March 2016)<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Welcome to Guess the Number Game - Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Guess The Number is a number guessing game application.</p>
+
+<p>The main objective of this game is to guess an integer between 1 and 100 and try to match it with the computer&#39;s random selection number using random function. Below shows how the application works:</p>
+
+<ul>
+<li>You can try by input your lucky number</li>
+<li>Once entered, please button &quot;GO&quot;</li>
+<li>Server code will process the number entered</li>
+<li>A random number is generated between 1 and 100</li>
+<li>The random number is compare against the user entered number</li>
+<li>The history of the Guess number and result of the Guess will provide hints if the user number is lower or higher than the computer random number.</li>
+<li>You may click on &quot;Analyze&quot; button to view Guess Number Analyzer in Graphical mode.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="1" style="background:;">
+  <hgroup>
+    <h2>UI Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>here is some of the sample code of R to create an input for the Number Guess with additional button for display Analyze Graph:</p>
+
+<pre><code class="r">#shinyUI(pageWithSidebar(
+  ## Application title
+  #headerPanel(&quot;Guess The Number!&quot;,&quot;Result of your Guess&quot;),
+  #sidebarPanel(
+  #  wellPanel(
+  #    textInput(&#39;datavalues&#39;, &quot;Number Guess&quot;,&quot;&quot;),
+  #    h5(&#39;Please press \&#39;Go!\&#39; to see your guessing result, or press \&#39;Analyze!\&#39; which provide analysis on your Number guess.&#39;),
+  #    actionButton(&quot;submit&quot;,&quot;Go&quot;),
+  #    actionButton(&quot;hints&quot;,&quot;Analyze&quot;)  )
+  #)
+  #)  
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="2" style="background:;">
+  <hgroup>
+    <h2>Server Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Code for reparing the ploting of the histogram to show analysics of the Number Guess :</p>
+
+<pre><code class="r">library(ggplot2)
+#sample data 
+xlist &lt;- c(1,2,3,4,5)
+ylist &lt;- c(-30,20,-10,10,0)
+dtf &lt;- data.frame(xlist,ylist)  
+ggplot(dtf, aes(xlist, ylist)) + geom_bar(stat = &quot;identity&quot;, aes(fill=xlist)) + labs(x=&quot;No of Tries&quot;, y=&quot;Gap between Number Guess&quot;, title=&quot;Number Guess Analyzer&quot;)+ geom_text(aes(label = ylist)) + theme_bw()
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="3" style="background:;">
+  <hgroup>
+    <h2>How to Play with Guess Number Analyzer</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Test it out, here is the link :</p>
+
+<p><a href="https://simonk.shinyapps.io/guess/">Click here to play</a></p>
+
+<p>Beat the Machine with your lucky number. </p>
+
+<p>If you need some help, press the &quot;Analyze&quot; button to set the Analyze Graph on which show you the gap between the Number Guess and the Computer selected number.</p>
+
+<p>Enjoy!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Welcome to Guess the Number Game - Summary'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='UI Code'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Server Code'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='How to Play with Guess Number Analyzer'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

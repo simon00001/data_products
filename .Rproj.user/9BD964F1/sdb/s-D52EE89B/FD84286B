@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle       : Developing Data Products - Course Project \nsubtitle    : Guess the Number Game (with Analyzer)\nauthor      : Simon Kong (6 March 2016)\njob         : \nframework   : io2012        # {io2012, html5slides, shower, dzslides, ...}\nhighlighter : highlight.js  # {highlight.js, prettify, highlight}\nhitheme     : tomorrow      # \nwidgets     : []            # {mathjax, quiz, bootstrap}\nmode        : selfcontained # {standalone, draft}\nknit        : slidify::knit2slides\n---\n\n## Welcome to Guess the Number Game - Summary\n\nGuess The Number is a number guessing game application.\n\nThe main objective of this game is to guess an integer between 1 and 100 and try to match it with the computer's random selection number using random function. Below shows how the application works:\n\n  - You can try by input your lucky number\n  - Once entered, please button \"GO\"\n  - Server code will process the number entered\n  - A random number is generated between 1 and 100\n  - The random number is compare against the user entered number\n  - The history of the Guess number and result of the Guess will provide hints if the user number is lower or higher than the computer random number.\n  - You may click on \"Analyze\" button to view Guess Number Analyzer in Graphical mode.\n\n\n--- .class #1\n  \n\n## UI Code\nhere is some of the sample code of R to create an input for the Number Guess with additional button for display Analyze Graph:\n```{r}\n#shinyUI(pageWithSidebar(\n  ## Application title\n  #headerPanel(\"Guess The Number!\",\"Result of your Guess\"),\n  #sidebarPanel(\n  #  wellPanel(\n  #    textInput('datavalues', \"Number Guess\",\"\"),\n  #    h5('Please press \\'Go!\\' to see your guessing result, or press \\'Analyze!\\' which provide analysis on your Number guess.'),\n  #    actionButton(\"submit\",\"Go\"),\n  #    actionButton(\"hints\",\"Analyze\")  )\n  #)\n  #)  \n  \n```\n\n\n\n--- .class #2\n\n## Server Code\n\nCode for reparing the ploting of the histogram to show analysics of the Number Guess :\n```{r, echo = TRUE, warning=FALSE}\nlibrary(ggplot2)\n#sample data \nxlist <- c(1,2,3,4,5)\nylist <- c(-30,20,-10,10,0)\ndtf <- data.frame(xlist,ylist)  \nggplot(dtf, aes(xlist, ylist)) + geom_bar(stat = \"identity\", aes(fill=xlist)) + labs(x=\"No of Tries\", y=\"Gap between Number Guess\", title=\"Number Guess Analyzer\")+ geom_text(aes(label = ylist)) + theme_bw()\n``` \n***\n\n--- .class #3\n\n## How to Play with Guess Number Analyzer\nTest it out, here is the link :\n\n [Click here to play](https://simonk.shinyapps.io/guess/)\n\nBeat the Machine with your lucky number. \n\nIf you need some help, press the \"Analyze\" button to set the Analyze Graph on which show you the gap between the Number Guess and the Computer selected number.\n\nEnjoy!\n\n",
+    "created" : 1457468897071.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3428040871",
+    "id" : "FD84286B",
+    "lastKnownWriteTime" : 1457469151,
+    "path" : "~/GitHub/shiny/guess/index.Rmd",
+    "project_path" : "index.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}
